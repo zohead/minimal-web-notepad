@@ -30,7 +30,7 @@ function checkHeader($path, $line=null, $includeJS=false)
     }
 
     if ($headerFound) {
-        $password = (isset($noteheader['password']) ? $noteheader['password'] : ''); //check if there is a password in the Header
+        $password = (isset($_GET['pwd']) ? $_GET['pwd'] : ''); //check if there is input password
         $pwd = (isset($noteheader['pwd']) ? $noteheader['pwd'] : ''); //check if there is a pwd in the Header
         $passwordhash = (isset($noteheader['password']) ? $noteheader['password'] : ''); //check if there is a password hash in the Header
         $allowReadOnlyView = (isset($noteheader['allowReadOnlyView']) ? $noteheader['allowReadOnlyView'] : ''); //check if view only without a password is allowed
@@ -47,7 +47,9 @@ function checkHeader($path, $line=null, $includeJS=false)
                 session_start();
             }
 
-            if ($allowReadOnlyView == '1' and basename($_SERVER['PHP_SELF']) == 'view.php') { /* viewing the page in readonly is ok from the view.php is ok so don't prompt for password */
+            $base_php = basename($_SERVER['PHP_SELF']);
+            if ($allowReadOnlyView == '1' and ($base_php == 'view.php' or $base_php == 'txt.php' or $base_php == 'html.php')) { /* viewing the page in readonly is ok from the view.php is ok so don't prompt for password */
+            } else if ($password !== '' && ($password == $pwd || password_verify($password, $passwordhash))) {
             } else {
                 // if readonly view is not allowed and the calling page is not view.php then prompt for the password
                 require_once 'modules/protect.php';
