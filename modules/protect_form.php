@@ -13,7 +13,7 @@
 		font-size: large;
 	}
 	</style>
-	<title><?php if (isset($_GET['note'])) print $_GET['note']; ?></title>
+	<title><?php if (isset($_GET['note'])) print 'Note - ' . $_GET['note']; else print 'Note list'; ?></title>
 </head>
 <body onload="document.forms[0].password.focus();">
 <div class="center">
