@@ -58,7 +58,7 @@ if (is_file($path)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Minimal Web Notepad (https://github.com/domorielton/minimal-web-notepad)">
-    <title><?php print $_GET['note']; ?></title>
+    <title>Note - <?php print $_GET['note']; ?></title>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="css/simple.min.css">
 </head>
