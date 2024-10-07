@@ -3,6 +3,9 @@
 # example based on solution from @eonegh - see https://github.com/domOrielton/minimal-web-notepad/issues/4 
 
 location / {
+    if ($uri ~ "^/[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.html$") {
+        rewrite ^/([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)\.html$ /html.php?note=$1 last;
+    }
     if ($uri ~ "^/[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.txt$") {
         rewrite ^/([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)\.txt$ /txt.php?note=$1 last;
     }
@@ -11,6 +14,9 @@ location / {
     }
     if ($query_string ~ "^simple") {
         rewrite ^/([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)$ /simple.php?note=$1 last;
+    }
+    if ($query_string ~ "^html") {
+        rewrite ^/([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)$ /html.php?note=$1 last;
     }
     if ($query_string ~ "^txt") {
         rewrite ^/([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)$ /txt.php?note=$1 last;
