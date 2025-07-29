@@ -9,6 +9,9 @@ location / {
     if ($uri ~ "^/[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.txt$") {
         rewrite ^/([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)\.txt$ /txt.php?note=$1 last;
     }
+    if ($uri ~ "^/[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.b64$") {
+        rewrite ^/([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)\.b64$ /txt.php?encode=base64&note=$1 last;
+    }
     if ($query_string ~ "^view") {
         rewrite ^/([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)$ /view.php?note=$1 last;
     }

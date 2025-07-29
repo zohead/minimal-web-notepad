@@ -15,6 +15,9 @@ include 'modules/header.php';
 $content = '';
 if (is_file($path)) {
 	$content = getFileContents($path);
+
+	if ($_GET['encode'] == 'base64')
+		$content = base64_encode($content);
 }
 
 header('Content-Type: text/plain');
